@@ -1,0 +1,20 @@
+{
+  "name": "bill-splitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "webpack",
+    "host": "live-server",
+    "test": "jest",
+    "test-watch": "jest --watchAll"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^22.4.3"
+  },
+  "dependencies": {
+    "webpack": "^3.1.0"
+  }
+}
