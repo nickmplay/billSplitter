@@ -18,7 +18,8 @@ afterEach(function () {
 });
 
 const fakeID = mockDateNow();
-const fakePerson = {id:fakeID, type:"split", amount:0}
+const fakePerson1 = {id:fakeID, type:"split", amount:0}
+const fakePerson2 = {id:fakeID + 1, type:"split", amount:0}
 
 //default settings
 test('instantiate a Bill class', () => {
@@ -26,13 +27,13 @@ test('instantiate a Bill class', () => {
   expect( newBill.countPeople() ).toBe(2);
   expect( newBill.amount ).toBe(100);
   expect( newBill.service ).toBe(true);
-  expect( newBill.people ).toMatchObject([fakePerson, fakePerson]);
+  expect( newBill.people ).toMatchObject([fakePerson1, fakePerson2]);
 }); 
 
 //create a person
 test('instantiate a person', () => {
   const newPerson = new Person();
-  expect(newPerson).toMatchObject(fakePerson);
+  expect(newPerson).toMatchObject(fakePerson1);
 }); 
 
 //add a person
@@ -40,51 +41,46 @@ test('create a person', () => {
   const newBill = new Bill(100);
   newBill.addPerson();
   expect( newBill.countPeople() ).toBe(3);
-  expect( newBill.people[2] ).toMatchObject(fakePerson);
+  expect( newBill.people[2] ).toMatchObject(fakePerson1);
 }); 
 
 //remove a person
 test('remove a person', () => {
   const newBill = new Bill(100);
-  const newId = fakeID + 1;
-  const newPerson = {id:newId, type:"split", amount:0};
-  newBill.people[0].id = newId;
-  newBill.removePerson(fakeID);
+  newBill.removePerson(fakePerson1.id);
   expect( newBill.countPeople() ).toBe(1);
-  expect( newBill.people[0] ).toMatchObject(newPerson);
+  expect( newBill.people[0] ).toMatchObject(fakePerson2);
 }); 
 
 test("don't remove a person", () => {
   const newBill = new Bill(100);
   newBill.removePerson(12);
   expect( newBill.countPeople() ).toBe(2);
-  expect( newBill.people ).toMatchObject([fakePerson, fakePerson]);
+  expect( newBill.people ).toMatchObject([fakePerson1, fakePerson2]);
 }); 
 
 //update a person
 test("update a person", () => {
   const newBill = new Bill(100);
-  const newId = fakeID + 1;
-  const newPerson = {id:newId, type:"total", amount:12};
-  newBill.people[0].id = newId;
+  const newPerson = {id:fakePerson1.id, type:"total", amount:12};
   newBill.updatePerson(newPerson.id, newPerson.type, newPerson.amount);
   expect( newBill.countPeople() ).toBe(2);
-  expect( newBill.people ).toMatchObject([newPerson, fakePerson]);
+  expect( newBill.people ).toMatchObject([newPerson, fakePerson2]);
 }); 
 
 test("don't update a person", () => {
   const newBill = new Bill(100);
   const flag = newBill.updatePerson();
   expect( newBill.countPeople() ).toBe(2);
-  expect( newBill.people ).toMatchObject([fakePerson, fakePerson]);
+  expect( newBill.people ).toMatchObject([fakePerson1, fakePerson2]);
   expect(flag).toBe(false);
 }); 
 
 test("don't update a person", () => {
   const newBill = new Bill(100);
-  const flag = newBill.updatePerson(fakePerson.id);
+  const flag = newBill.updatePerson(fakePerson1.id);
   expect( newBill.countPeople() ).toBe(2);
-  expect( newBill.people ).toMatchObject([fakePerson, fakePerson]);
+  expect( newBill.people ).toMatchObject([fakePerson1, fakePerson2]);
   expect(flag).toBe(false);
 }); 
 

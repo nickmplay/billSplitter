@@ -12,6 +12,9 @@ function Bill (amount, service = true) {
     new Person()
   ];
 
+  //to ensure uniqueness
+  this.people[1].id++;
+  
   //return number of people
   this.countPeople = function() {
     return this.people.length;
