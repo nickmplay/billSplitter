@@ -62,13 +62,13 @@ test("don't remove a person", () => {
 //update a person
 test("update a person", () => {
   const newBill = new Bill(100);
-  const newPerson = {id:fakePerson1.id, type:"total", amount:12};
+  const newPerson = {id:fakePerson1.id, type:"more", amount:12};
   newBill.updatePerson(newPerson.id, newPerson.type, newPerson.amount);
   expect( newBill.countPeople() ).toBe(2);
   expect( newBill.people ).toMatchObject([newPerson, fakePerson2]);
 }); 
 
-test("don't update a person", () => {
+test("don't update a blank person", () => {
   const newBill = new Bill(100);
   const flag = newBill.updatePerson();
   expect( newBill.countPeople() ).toBe(2);
@@ -76,7 +76,16 @@ test("don't update a person", () => {
   expect(flag).toBe(false);
 }); 
 
-test("don't update a person", () => {
+test("don't update an incomplete person", () => {
+  const newBill = new Bill(100);
+  const newPerson = {id:fakePerson1.id, type:"wrong-type", amount:12};
+  const flag = newBill.updatePerson(newPerson.id, newPerson.type, newPerson.amount);
+  expect( newBill.countPeople() ).toBe(2);
+  expect( newBill.people ).toMatchObject([fakePerson1, fakePerson2]);
+  expect(flag).toBe(false);
+}); 
+
+test("don't update an incorrect type", () => {
   const newBill = new Bill(100);
   const flag = newBill.updatePerson(fakePerson1.id);
   expect( newBill.countPeople() ).toBe(2);
@@ -101,3 +110,47 @@ test("don't read a person", () => {
   expect( newBill.countPeople() ).toBe(2);
   expect(read).toBe(false);
 }); 
+
+//split the bill
+test("split the bill by one", ()=>{
+  const newBill = new Bill(100);
+  const share1 = {id: fakePerson1.id, type: "split", share: newBill.amount};
+  newBill.removePerson(newBill.people[1].id);
+  expect( newBill.countPeople() ).toBe(1);
+  expect( newBill.split() ).toMatchObject([share1]);
+});
+
+test("split the bill by all", ()=>{
+  const newBill = new Bill(100);
+  const shareAmount = Math.round(100 * 100 / 3) / 100;
+  const share1 = {id: fakePerson1.id, type: "split", share: shareAmount};
+  const share2 = {id: fakePerson2.id, type: "split", share: shareAmount};
+  newBill.addPerson();
+  expect( newBill.countPeople() ).toBe(3);
+  expect( newBill.split() ).toMatchObject([share1, share2, share1]);
+});
+
+test("split the bill with some fixed", ()=>{
+  const newBill = new Bill(100);  
+  const share1 = {id: fakePerson1.id, type: "split", share: 40};
+  const share2 = {id: fakePerson2.id, type: "split", share: 40};
+  const share3 = {id: share2.id + 1, type: "fixed", share: 20};
+  newBill.addPerson();
+  newBill.people[2].id = share3.id;
+  newBill.updatePerson(share3.id, share3.type, share3.share);
+  expect( newBill.countPeople() ).toBe(3);
+  expect( newBill.split() ).toMatchObject([share1, share2, share3]);
+});
+
+test("split the bill with some fixed", ()=>{
+  const newBill = new Bill(100);  
+  const share1 = {id: fakePerson1.id, type: "split", share: 65};
+  const share2 = {id: fakePerson2.id, type: "fixed", share: 15};
+  const share3 = {id: share2.id + 1, type: "fixed", share: 20};
+  newBill.addPerson();
+  newBill.people[2].id = share3.id;
+  newBill.updatePerson(share2.id, share2.type, share2.share);
+  newBill.updatePerson(share3.id, share3.type, share3.share);
+  expect( newBill.countPeople() ).toBe(3);
+  expect( newBill.split() ).toMatchObject([share1, share2, share3]);
+});
