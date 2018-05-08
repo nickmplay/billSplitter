@@ -154,3 +154,54 @@ test("split the bill with some fixed", ()=>{
   expect( newBill.countPeople() ).toBe(3);
   expect( newBill.split() ).toMatchObject([share1, share2, share3]);
 });
+
+test("split the bill with some fixed and more", ()=>{
+  const newBill = new Bill(100);  
+  const share1 = {id: fakePerson1.id, type: "split", share: 21};
+  const share2 = {id: fakePerson2.id, type: "fixed", share: 15};
+  const share3 = {id: share2.id + 1, type: "more", share: 31};
+  const share4 = {id: share2.id + 2, type: "more", share: 33};
+  newBill.addPerson();
+  newBill.people[2].id = share3.id;
+  newBill.addPerson();
+  newBill.people[3].id = share4.id;
+  newBill.updatePerson(share2.id, share2.type, 15);
+  newBill.updatePerson(share3.id, share3.type, 10);
+  newBill.updatePerson(share4.id, share4.type, 12);
+  expect( newBill.countPeople() ).toBe(4);
+  expect( newBill.split() ).toMatchObject([share1, share2, share3, share4]);
+});
+
+test("split the bill with some fixed and less", ()=>{
+  const newBill = new Bill(100);  
+  const share1 = {id: fakePerson1.id, type: "split", share: 35.67};
+  const share2 = {id: fakePerson2.id, type: "fixed", share: 15};
+  const share3 = {id: share2.id + 1, type: "less", share: 25.67};
+  const share4 = {id: share2.id + 2, type: "less", share: 23.67};
+  newBill.addPerson();
+  newBill.people[2].id = share3.id;
+  newBill.addPerson();
+  newBill.people[3].id = share4.id;
+  newBill.updatePerson(share2.id, share2.type, 15);
+  newBill.updatePerson(share3.id, share3.type, 10);
+  newBill.updatePerson(share4.id, share4.type, 12);
+  expect( newBill.countPeople() ).toBe(4);
+  expect( newBill.split() ).toMatchObject([share1, share2, share3, share4]);
+});
+
+test("split the bill with some fixed, more and less", ()=>{
+  const newBill = new Bill(100);  
+  const share1 = {id: fakePerson1.id, type: "split", share: 29};
+  const share2 = {id: fakePerson2.id, type: "fixed", share: 15};
+  const share3 = {id: share2.id + 1, type: "more", share: 39};
+  const share4 = {id: share2.id + 2, type: "less", share: 17};
+  newBill.addPerson();
+  newBill.people[2].id = share3.id;
+  newBill.addPerson();
+  newBill.people[3].id = share4.id;
+  newBill.updatePerson(share2.id, share2.type, 15);
+  newBill.updatePerson(share3.id, share3.type, 10);
+  newBill.updatePerson(share4.id, share4.type, 12);
+  expect( newBill.countPeople() ).toBe(4);
+  expect( newBill.split() ).toMatchObject([share1, share2, share3, share4]);
+});

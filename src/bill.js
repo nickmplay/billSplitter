@@ -100,34 +100,38 @@ function Bill (amount, service = true) {
       return shares;
     }
 
-    //case: some shares and some fixed
-    if( count.split > 0 && count.fixed > 0 ){
-      let sumFixed = 0;
-      
-      //calc total fixed amounts to net off total
-      for(let i = 0; i < n; i++){
-        if(this.people[i].type == "fixed"){
-          sumFixed += this.people[i].amount;
-        }
+    //case else: at least one more, less or fixed
+    let sumAdj = 0;
+    //calc adj total for fixed, more and less
+    for(let i=0; i<n; i++){
+      if( this.people[i].type == "fixed" || this.people[i].type == "more" ){
+        sumAdj -= this.people[i].amount;
+      } else if( this.people[i].type == "less" ){
+        sumAdj += this.people[i].amount;
       }
-      amount -= sumFixed;
-      let average = this.r2dp(amount / count.split);
-
-      //populate results array
-      for(let i = 0; i < n; i++){
-        if( this.people[i].type == "fixed" ){
-          shares.push({id: this.people[i].id, type: "fixed", share: this.people[i].amount });
-        } else {
-          shares.push({id: this.people[i].id, type: "split", share: average });
-        }
-      };
-
-      return shares;
     }
+    amount += sumAdj;
+    let average = this.r2dp( amount / (n - count.fixed) );
 
-    
+    //populate results array
+    for(let i = 0; i < n; i++){
+      switch(this.people[i].type){
+        case "split":
+          shares.push({id: this.people[i].id, type: "split", share: average }); 
+          break;
+        case "more":
+          shares.push({id: this.people[i].id, type: "more", share: average + this.people[i].amount });
+          break;
+        case "less":
+          shares.push({id: this.people[i].id, type: "less", share: average - this.people[i].amount });
+          break;
+        case "fixed":
+          shares.push({id: this.people[i].id, type: "fixed", share: this.people[i].amount });
+          break;
+      }
+    };
 
-
+    return shares;
   }
 
   //utilities
