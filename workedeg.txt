@@ -16,8 +16,25 @@ split, share=21
 
 check: 31+15+33+21=100
 
-
 //case 2
+bill:100
+
+less:10
+fixed:15
+less:12
+split
+
+newBill = 100 + 10 - 15 + 12 = 107
+split(3) = 35.67
+
+less:10; share:35.67-10=25.67
+fixed:15; share:15
+less:12; share = 35.67-12=23.67
+split, share=35.67
+
+check: 25.67+15+23.67+35.67=100.01
+
+//case 3
 bill:100
 
 more:10
@@ -35,20 +52,3 @@ split, share=29
 
 check: 39+15+17+29=100
 
-//case 3
-bill:100
-
-less:10
-fixed:15
-less:12
-split
-
-newBill = 100 + 10 - 15 + 12 = 107
-split(3) = 35.67
-
-less:10; share:35.67-10=25.67
-fixed:15; share:15
-less:12; share = 35.67-12=23.67
-split, share=35.67
-
-check: 25.67+15+23.67+35.67=100.01

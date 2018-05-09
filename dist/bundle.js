@@ -75,6 +75,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const {Bill, Person} = __webpack_require__(1);
+const { ViewBill } = __webpack_require__(2);
+
+module.exports = {Bill, Person, ViewBill};
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
 //Person object to be instantiated into an array of people
@@ -221,6 +230,43 @@ function Bill (amount, service = true) {
 };
 
 module.exports = {Bill, Person};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+//define view of the Bill model
+function ViewBill() {
+  //test functions
+  this.test = function(){
+    return {id:"test"}
+  };
+
+  this.domTest = function() {
+    const div = document.createElement("div");
+    div.innerHTML = "<h1>Hello world</h1>";
+    return div;
+  };
+
+  this.domChangeTest = function(elem) {
+    elem.setAttribute("class", "new-class");
+    elem.innerHTML = "<span>ViewBill entry</span>"
+    return elem;
+  };
+
+  //person views
+  this.personTemplate = "{{type}} to pay {{amount}}";
+
+  this.createPersonLi = function(data){
+    const pDiv = document.createElement("li");
+    let pInner = this.personTemplate.replace("{{type}}", data.type).replace("{{amount}}", data.amount);
+    pDiv.innerHTML = pInner;
+    return pDiv;
+  }
+
+};
+
+module.exports = { ViewBill };
 
 /***/ })
 /******/ ]);
