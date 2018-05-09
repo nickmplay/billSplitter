@@ -32,3 +32,23 @@ test('test person template injection', () => {
   const FP1Div = newVB.createPersonLi(fakePerson1);
   expect( FP1Div ).toMatchSnapshot();
 }); 
+
+//update person DOM
+test('test person DOM update', () => {
+  const newVB = new ViewBill();
+  const fakePerson1a = {id:fakePerson1.id, type:"split", amount:12 };
+  const FP1Div = newVB.createPersonLi(fakePerson1);
+  expect( FP1Div ).toMatchSnapshot();
+  newVB.updatePerson(FP1Div, fakePerson1a);
+  expect( FP1Div ).toMatchSnapshot();
+}); 
+
+test('test person DOM does not update', () => {
+  const newVB = new ViewBill();
+  const fakePerson1a = {id:123, type:"split", amount:12 };
+  const FP1Div = newVB.createPersonLi(fakePerson1);
+  expect( FP1Div ).toMatchSnapshot();
+  const flag = newVB.updatePerson(FP1Div, fakePerson1a);
+  expect( FP1Div ).toMatchSnapshot();
+  expect(flag).toBe(false);
+}); 

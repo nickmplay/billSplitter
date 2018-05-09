@@ -18,13 +18,23 @@ function ViewBill() {
   };
 
   //person views
-  this.personTemplate = "{{type}} to pay {{amount}}";
-
   this.createPersonLi = function(data){
+    const personTemplate = "To pay <span class='p-type'>{{type}}</span> <span class='p-amount'>{{amount}}</span>";
     const pDiv = document.createElement("li");
-    let pInner = this.personTemplate.replace("{{type}}", data.type).replace("{{amount}}", data.amount);
+    pDiv.setAttribute("p-id", data.id);
+    let pInner = personTemplate.replace("{{type}}", data.type).replace("{{amount}}", data.amount);
     pDiv.innerHTML = pInner;
     return pDiv;
+  }
+
+  this.updatePerson = function(elem, data){
+    //validate person id is equal
+    if(elem.getAttribute("p-id") == data.id){
+      elem.querySelector(".p-type").innerHTML = data.type;
+      elem.querySelector(".p-amount").innerHTML = data.amount;
+    } else {
+      return false;
+    }
   }
 
 };
