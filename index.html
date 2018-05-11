@@ -8,22 +8,45 @@
   <script src="./dist/bundle.js"></script>
 </head>
 <body>
-  <h1 id="header">Hello there World</h1>
+  <h1 id="header">Bill Splitter App</h1>
+  <div id="app"></div>
   <script>
     const newVB = new ViewBill();
     const newBill = new Bill(100);
     newBill.updatePerson( newBill.people[0].id, "more", 10);
 
     //people
+    const total = newVB.createAmountInput();
     const olPeople = document.createElement("ol");
     const p1 = newVB.createPersonLi( newBill.people[0] );
     const p2 = newVB.createPersonLi( newBill.people[1] );
-    
+    const btn = newVB.addPersonButton();
 
+    //append elements to DOM
+    document.getElementById("app").appendChild(total);
     olPeople.appendChild(p1);
     olPeople.appendChild(p2);
-    document.body.appendChild(olPeople);
+    document.getElementById("app").appendChild(olPeople);
+    olPeople.appendChild(btn);
     
+    //add event listeners
+    app.getElementsByTagName("select")[0].addEventListener("change", (e) => {
+      const options = e.target.children;
+      const personId = e.target.parentElement.getAttribute("p-id");
+      let chosenIndex = -1;
+      for(let i=0; i<options.length; i++){
+        if(options[i].selected){
+          chosenIndex = i;
+        }
+      }
+      console.log(e.target.children[chosenIndex].value, personId );
+    });
+
+    //remove person 
+    p1.querySelector("button").addEventListener("click", (e) => {
+      console.log(e);
+      e.target.parentElement.remove();
+    })
 
   </script>
 </body>

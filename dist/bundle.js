@@ -263,7 +263,7 @@ function ViewBill() {
       const sel = data.type === e ? "selected" : "";
       return `<option value='${e}' ${sel}>${e}</option>`;
     }).join('');
-    personTemplate += "</select>";
+    personTemplate += "</select><button>X</button>";
 
     //create element and inject data
     const pDiv = document.createElement("li");
@@ -287,6 +287,19 @@ function ViewBill() {
     } else {
       return false;
     }
+  }
+
+  this.addPersonButton = function(){
+    const addPersonBtn = document.createElement("button");
+    addPersonBtn.innerHTML = "Add Person";
+    return addPersonBtn;
+  }
+
+  this.createAmountInput = function(){
+    const amountInput = document.createElement("input");
+    amountInput.setAttribute("type", "text");
+    amountInput.setAttribute("placeholder", "Enter amount");
+    return amountInput;
   }
   
 

@@ -52,3 +52,15 @@ test('test person DOM does not update', () => {
   expect( FP1Div ).toMatchSnapshot();
   expect(flag).toBe(false);
 }); 
+
+//test person button 
+test('test add person button', () => {
+  const newVB = new ViewBill();
+  expect( newVB.addPersonButton() ).toMatchSnapshot();
+}); 
+
+//test add amount input 
+test('test input amount box', () => {
+  const newVB = new ViewBill();
+  expect( newVB.createAmountInput() ).toMatchSnapshot();
+}); 

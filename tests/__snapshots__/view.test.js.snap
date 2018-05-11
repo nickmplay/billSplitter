@@ -30,6 +30,19 @@ exports[`test a ViewBill DOM return 1`] = `
 </div>
 `;
 
+exports[`test add person button 1`] = `
+<button>
+  Add Person
+</button>
+`;
+
+exports[`test input amount box 1`] = `
+<input
+  placeholder="Enter amount"
+  type="text"
+/>
+`;
+
 exports[`test person DOM does not update 1`] = `
 <li
   p-id="1462361249717"
@@ -65,6 +78,9 @@ exports[`test person DOM does not update 1`] = `
       fixed
     </option>
   </select>
+  <button>
+    X
+  </button>
 </li>
 `;
 
@@ -103,6 +119,9 @@ exports[`test person DOM does not update 2`] = `
       fixed
     </option>
   </select>
+  <button>
+    X
+  </button>
 </li>
 `;
 
@@ -141,6 +160,9 @@ exports[`test person DOM update 1`] = `
       fixed
     </option>
   </select>
+  <button>
+    X
+  </button>
 </li>
 `;
 
@@ -179,6 +201,9 @@ exports[`test person DOM update 2`] = `
       fixed
     </option>
   </select>
+  <button>
+    X
+  </button>
 </li>
 `;
 
@@ -217,5 +242,8 @@ exports[`test person template injection 1`] = `
       fixed
     </option>
   </select>
+  <button>
+    X
+  </button>
 </li>
 `;
