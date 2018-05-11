@@ -19,10 +19,19 @@ function ViewBill() {
 
   //person views
   this.createPersonLi = function(data){
-    const personTemplate = "To pay <span class='p-type'>{{type}}</span> <span class='p-amount'>{{amount}}</span>";
+    const options = ["split", "more", "less", "fixed"];
+    let personTemplate = "To pay ";
+    personTemplate += "<input type='text' class='p-amount' placeholder='{{amount}}'</input><select>";
+    personTemplate += options.map( e => {
+      const sel = data.type === e ? "selected" : "";
+      return `<option value='${e}' ${sel}>${e}</option>`;
+    }).join('');
+    personTemplate += "</select>";
+
+    //create element and inject data
     const pDiv = document.createElement("li");
     pDiv.setAttribute("p-id", data.id);
-    let pInner = personTemplate.replace("{{type}}", data.type).replace("{{amount}}", data.amount);
+    let pInner = personTemplate.replace("{{amount}}", data.amount);
     pDiv.innerHTML = pInner;
     return pDiv;
   }
@@ -30,12 +39,19 @@ function ViewBill() {
   this.updatePerson = function(elem, data){
     //validate person id is equal
     if(elem.getAttribute("p-id") == data.id){
-      elem.querySelector(".p-type").innerHTML = data.type;
-      elem.querySelector(".p-amount").innerHTML = data.amount;
+      const options = ["split", "more", "less", "fixed"];
+      const newOptionsHTML = options.map( e => {
+        const sel = data.type === e ? "selected" : "";
+        return `<option value='${e}' ${sel}>${e}</option>`;
+      }).join('');
+      // elem.querySelector(".p-type").innerHTML = data.type;
+      elem.getElementsByTagName("select")[0].innerHTML = newOptionsHTML;
+      elem.getElementsByClassName("p-amount")[0].placeholder = data.amount;
     } else {
       return false;
     }
   }
+  
 
 };
 

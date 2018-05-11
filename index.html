@@ -10,8 +10,21 @@
 <body>
   <h1 id="header">Hello there World</h1>
   <script>
+    const newVB = new ViewBill();
     const newBill = new Bill(100);
-    document.getElementById("header").innerHTML += ` ${newBill.countPeople()}`;
+    newBill.updatePerson( newBill.people[0].id, "more", 10);
+
+    //people
+    const olPeople = document.createElement("ol");
+    const p1 = newVB.createPersonLi( newBill.people[0] );
+    const p2 = newVB.createPersonLi( newBill.people[1] );
+    
+
+    olPeople.appendChild(p1);
+    olPeople.appendChild(p2);
+    document.body.appendChild(olPeople);
+    
+
   </script>
 </body>
 </html>
