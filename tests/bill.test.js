@@ -104,6 +104,17 @@ test("read a person", () => {
   expect(read).toMatchObject(newPerson);
 }); 
 
+test("read a person with string id", () => {
+  const newBill = new Bill(100);
+  const newId = fakeID + 1;
+  const newIdstring = `${newId}`;
+  const newPerson = {id:newId, type:"split", amount:0};
+  newBill.people[0].id = newId;
+  const read = newBill.readPerson(newId);
+  expect( newBill.countPeople() ).toBe(2);
+  expect(read).toMatchObject(newPerson);
+}); 
+
 test("don't read a person", () => {
   const newBill = new Bill(100);
   const read = newBill.readPerson(12);

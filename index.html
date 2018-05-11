@@ -14,39 +14,53 @@
     const newVB = new ViewBill();
     const newBill = new Bill(100);
     newBill.updatePerson( newBill.people[0].id, "more", 10);
+    const app = document.getElementById("app");
+    const removePersonCallbank = e => e.target.parentElement.remove();
 
-    //people
+    //instantiate app
     const total = newVB.createAmountInput();
     const olPeople = document.createElement("ol");
     const p1 = newVB.createPersonLi( newBill.people[0] );
+    p1.querySelector("button").addEventListener("click", removePersonCallbank);
     const p2 = newVB.createPersonLi( newBill.people[1] );
+    p2.querySelector("button").addEventListener("click", removePersonCallbank);
+    
     const btn = newVB.addPersonButton();
-
+    btn.addEventListener("click", e => {
+      newBill.addPerson();
+      const pNew = newBill.people[ newBill.countPeople()-1 ]; 
+      const pNewElem = newVB.createPersonLi(pNew);
+      pNewElem.querySelector("button").addEventListener("click", removePersonCallbank);
+      olPeople.appendChild(pNewElem);
+    });
+    
     //append elements to DOM
-    document.getElementById("app").appendChild(total);
+    app.appendChild(total);
     olPeople.appendChild(p1);
     olPeople.appendChild(p2);
-    document.getElementById("app").appendChild(olPeople);
-    olPeople.appendChild(btn);
+    app.appendChild(olPeople);
+    app.appendChild(btn);
     
     //add event listeners
     app.getElementsByTagName("select")[0].addEventListener("change", (e) => {
       const options = e.target.children;
       const personId = e.target.parentElement.getAttribute("p-id");
+      const personJSON = newBill.readPerson(personId);
+  
+      //extract new type
       let chosenIndex = -1;
       for(let i=0; i<options.length; i++){
         if(options[i].selected){
           chosenIndex = i;
         }
       }
-      console.log(e.target.children[chosenIndex].value, personId );
+      
+      //update model, assuming amount unchanged
+      newBill.updatePerson(personId, e.target.children[chosenIndex].value, personJSON.amount );
+      // console.log(e.target.children[chosenIndex].value, personId);
+      // console.log(JSON.stringify(newBill.people));
     });
-
-    //remove person 
-    p1.querySelector("button").addEventListener("click", (e) => {
-      console.log(e);
-      e.target.parentElement.remove();
-    })
+    
 
   </script>
 </body>

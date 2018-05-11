@@ -123,7 +123,7 @@ function Bill (amount, service = true) {
   };
 
   //update a person
-  this.updatePerson = function(id, type, amount){
+  this.updatePerson = function(id, type, amount = 0){
     const permittedTypes = ["split", "more", "less", "fixed"];
     if(!id || !type){
       return false;
@@ -134,7 +134,7 @@ function Bill (amount, service = true) {
         if(e.id != id){
           return e;
         } else {
-          return {id, type, amount}
+          return {id: parseInt(id), type, amount: parseInt(amount)}
         }
       });
     };
@@ -145,7 +145,7 @@ function Bill (amount, service = true) {
     if(!id){
       return false;
     } else {
-      return this.people.find(e => e.id === id) || false;
+      return this.people.find(e => e.id === parseInt(id)) || false;
     };
   };
 
