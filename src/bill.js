@@ -30,7 +30,7 @@ function Bill (amount, service = true) {
     if(!id){
       return false;
     } else {
-      this.people = this.people.filter(e => e.id !== id);
+      this.people = this.people.filter(e => e.id !== parseInt(id));
     }
   };
 

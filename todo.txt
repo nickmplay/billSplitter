@@ -1,0 +1,7 @@
+amount validation and parsing
+event listener for amount
+split-amount_input dependency
+add share view
+add controller shareUpdate
+controller tests
+styling

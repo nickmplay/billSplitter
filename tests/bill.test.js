@@ -52,6 +52,15 @@ test('remove a person', () => {
   expect( newBill.people[0] ).toMatchObject(fakePerson2);
 }); 
 
+test("remove a person with string id", () => {
+  const newBill = new Bill(100);
+  const newId = fakePerson1.id;
+  const newIdstring = `${newId}`;
+  newBill.removePerson(newIdstring);
+  expect( newBill.countPeople() ).toBe(1);
+  expect( newBill.people[0] ).toMatchObject(fakePerson2);
+}); 
+
 test("don't remove a person", () => {
   const newBill = new Bill(100);
   newBill.removePerson(12);
