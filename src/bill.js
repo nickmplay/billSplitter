@@ -46,7 +46,7 @@ function Bill (amount, service = true) {
         if(e.id != id){
           return e;
         } else {
-          return {id: parseInt(id), type, amount: parseInt(amount)}
+          return {id: parseInt(id), type, amount: parseFloat(amount)}
         }
       });
     };

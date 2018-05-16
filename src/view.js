@@ -21,7 +21,7 @@ function ViewBill() {
   this.createPersonLi = function(data){
     const options = ["split", "more", "less", "fixed"];
     let personTemplate = "To pay ";
-    personTemplate += "<input type='text' class='p-amount' placeholder='{{amount}}'</input><select>";
+    personTemplate += "<input type='number' class='p-amount' placeholder='{{amount}}'</input><select>";
     personTemplate += options.map( e => {
       const sel = data.type === e ? "selected" : "";
       return `<option value='${e}' ${sel}>${e}</option>`;
@@ -60,7 +60,7 @@ function ViewBill() {
 
   this.createAmountInput = function(){
     const amountInput = document.createElement("input");
-    amountInput.setAttribute("type", "text");
+    amountInput.setAttribute("type", "number");
     amountInput.setAttribute("placeholder", "Enter amount");
     return amountInput;
   }

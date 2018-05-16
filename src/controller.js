@@ -18,18 +18,18 @@ function billController(billView, billModel, domTarget){
     const pNew = this.view.createPersonLi(data);
 
     //add event listeners
+    //..btn
     pNew.querySelector("button").addEventListener("click",  e => {
       const personId = e.target.parentElement.getAttribute("p-id");
       this.model.removePerson(personId);
       e.target.parentElement.remove();
     });
 
+    //..select option
     pNew.querySelector("select").addEventListener("change", e => {
       const options = e.target.children;
       const personId = e.target.parentElement.getAttribute("p-id");
       const personJSON = this.model.readPerson(personId);
-
-      // console.log( personId, options, personJSON );
 
       //extract new type
       let chosenIndex = -1;
@@ -40,10 +40,16 @@ function billController(billView, billModel, domTarget){
       }
       //update model, assuming amount unchanged
       this.model.updatePerson(personId, e.target.children[chosenIndex].value, personJSON.amount);
-      // console.log("updated");
-      // console.log(e.target.children[chosenIndex].value, personId);
-      console.log(JSON.stringify(this.model.people));
+      this.model.people.forEach(e=>console.log(e));
+    });
 
+    //..amount
+    pNew.querySelector("input").addEventListener("change", e => {
+      const personId = e.target.parentElement.getAttribute("p-id");
+      const personJSON = this.model.readPerson(personId);
+      //update model, assuming type unchanged
+      this.model.updatePerson(personId, personJSON.type, e.target.value);
+      this.model.people.forEach(e=>console.log(e));
     });
 
 

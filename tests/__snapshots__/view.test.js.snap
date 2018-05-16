@@ -39,7 +39,7 @@ exports[`test add person button 1`] = `
 exports[`test input amount box 1`] = `
 <input
   placeholder="Enter amount"
-  type="text"
+  type="number"
 />
 `;
 
@@ -53,7 +53,7 @@ exports[`test person DOM does not update 1`] = `
     class="p-amount"
     input=""
     placeholder="10"
-    type="text"
+    type="number"
   />
   <select>
     <option
@@ -94,7 +94,7 @@ exports[`test person DOM does not update 2`] = `
     class="p-amount"
     input=""
     placeholder="10"
-    type="text"
+    type="number"
   />
   <select>
     <option
@@ -135,7 +135,7 @@ exports[`test person DOM update 1`] = `
     class="p-amount"
     input=""
     placeholder="10"
-    type="text"
+    type="number"
   />
   <select>
     <option
@@ -176,7 +176,7 @@ exports[`test person DOM update 2`] = `
     class="p-amount"
     input=""
     placeholder="12"
-    type="text"
+    type="number"
   />
   <select>
     <option
@@ -217,7 +217,7 @@ exports[`test person template injection 1`] = `
     class="p-amount"
     input=""
     placeholder="10"
-    type="text"
+    type="number"
   />
   <select>
     <option
