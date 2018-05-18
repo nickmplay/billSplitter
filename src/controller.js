@@ -5,12 +5,19 @@ function billController(billView, billModel, domTarget){
   this.target = domTarget;
   this.olPeople = document.createElement("ol");
 
-  this.total = this.view.createAmountInput();
+  this.total = this.view.createAmountInput(this.model.amount);
   this.total.addEventListener("change", e => {
-    console.log(e.target.value);
-    this.model.amount = e.target.value;
-    console.log("amount", this.model.amount);
+    this.model.amount = parseFloat(e.target.value);
+    this.updateShares();
   });
+
+  //update shares
+  this.updateShares = function(){ 
+    this.shares = this.model.split();
+    for(let i=0; i<this.shares.length; i++){
+      this.view.updateShare(this.target, this.shares[i].id, this.shares[i].share);
+    }
+  }
   
   //create person
   this.createPerson = function(id){
@@ -23,6 +30,8 @@ function billController(billView, billModel, domTarget){
       const personId = e.target.parentElement.getAttribute("p-id");
       this.model.removePerson(personId);
       e.target.parentElement.remove();
+      //update shares
+      this.updateShares();
     });
 
     //..select option
@@ -40,7 +49,10 @@ function billController(billView, billModel, domTarget){
       }
       //update model, assuming amount unchanged
       this.model.updatePerson(personId, e.target.children[chosenIndex].value, personJSON.amount);
-      this.model.people.forEach(e=>console.log(e));
+      // this.model.people.forEach(e=>console.log(e));
+      
+      //update shares
+      this.updateShares();
     });
 
     //..amount
@@ -49,7 +61,10 @@ function billController(billView, billModel, domTarget){
       const personJSON = this.model.readPerson(personId);
       //update model, assuming type unchanged
       this.model.updatePerson(personId, personJSON.type, e.target.value);
-      this.model.people.forEach(e=>console.log(e));
+      // this.model.people.forEach(e=>console.log(e));
+
+      //update shares
+      this.updateShares();
     });
 
 
@@ -77,9 +92,12 @@ function billController(billView, billModel, domTarget){
       this.model.addPerson();
       const newId = this.model.people[ newBill.countPeople()-1 ].id; 
       this.createPerson(newId);
+      this.updateShares();
     });
     this.target.appendChild(btn);
 
+    //update shares
+    this.updateShares();
   }
 
 };

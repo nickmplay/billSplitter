@@ -7,7 +7,7 @@
 		var a = factory();
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function() {
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -153,14 +153,14 @@ function Bill (amount, service = true) {
 
   //split the bill
   this.split = function(){
-    let total = this.amount;
+    let total = this.amount + 0;
     const n = this.countPeople();
     const count = {split:0, more:0, less:0, fixed:0};
     let shares = [];
 
     //trivial case: only one person
     if (n === 1){
-      shares.push({id: this.people[0].id, type: "split", share: amount});
+      shares.push({id: this.people[0].id, type: "split", share: total});
       return shares;
     }
 
@@ -185,7 +185,7 @@ function Bill (amount, service = true) {
     //case: all share
     if( count.split === n){
       for(let i = 0; i < n; i++){
-        shares.push({id: this.people[i].id, type: "split", share: this.r2dp(amount / n) });
+        shares.push({id: this.people[i].id, type: "split", share: this.r2dp(total / n) });
       };
       return shares;
     }
@@ -200,8 +200,8 @@ function Bill (amount, service = true) {
         sumAdj += this.people[i].amount;
       }
     }
-    amount += sumAdj;
-    let average = this.r2dp( amount / (n - count.fixed) );
+    total += sumAdj;
+    let average = this.r2dp( total / (n - count.fixed) );
 
     //populate results array
     for(let i = 0; i < n; i++){
@@ -265,7 +265,8 @@ function ViewBill() {
       const sel = data.type === e ? "selected" : "";
       return `<option value='${e}' ${sel}>${e}</option>`;
     }).join('');
-    personTemplate += "</select><button>X</button>";
+    personTemplate += `</select><span p-id=${data.id}>Share: -</span>`;
+    personTemplate += "<button>X</button>";
 
     //create element and inject data
     const pDiv = document.createElement("li");
@@ -291,16 +292,21 @@ function ViewBill() {
     }
   }
 
+  this.updateShare = function(app, id, shareAmount){
+    app.querySelector(`span[p-id='${id}']`).innerHTML = `Share: ${shareAmount}`;
+  }
+
   this.addPersonButton = function(){
     const addPersonBtn = document.createElement("button");
     addPersonBtn.innerHTML = "Add Person";
     return addPersonBtn;
   }
 
-  this.createAmountInput = function(){
+  this.createAmountInput = function(startAmount = 0){
     const amountInput = document.createElement("input");
     amountInput.setAttribute("type", "number");
     amountInput.setAttribute("placeholder", "Enter amount");
+    amountInput.setAttribute("value", startAmount);
     return amountInput;
   }
   
@@ -320,12 +326,19 @@ function billController(billView, billModel, domTarget){
   this.target = domTarget;
   this.olPeople = document.createElement("ol");
 
-  this.total = this.view.createAmountInput();
+  this.total = this.view.createAmountInput(this.model.amount);
   this.total.addEventListener("change", e => {
-    console.log(e.target.value);
-    this.model.amount = e.target.value;
-    console.log("amount", this.model.amount);
+    this.model.amount = parseFloat(e.target.value);
+    this.updateShares();
   });
+
+  //update shares
+  this.updateShares = function(){ 
+    this.shares = this.model.split();
+    for(let i=0; i<this.shares.length; i++){
+      this.view.updateShare(this.target, this.shares[i].id, this.shares[i].share);
+    }
+  }
   
   //create person
   this.createPerson = function(id){
@@ -338,6 +351,8 @@ function billController(billView, billModel, domTarget){
       const personId = e.target.parentElement.getAttribute("p-id");
       this.model.removePerson(personId);
       e.target.parentElement.remove();
+      //update shares
+      this.updateShares();
     });
 
     //..select option
@@ -355,7 +370,10 @@ function billController(billView, billModel, domTarget){
       }
       //update model, assuming amount unchanged
       this.model.updatePerson(personId, e.target.children[chosenIndex].value, personJSON.amount);
-      this.model.people.forEach(e=>console.log(e));
+      // this.model.people.forEach(e=>console.log(e));
+      
+      //update shares
+      this.updateShares();
     });
 
     //..amount
@@ -364,7 +382,10 @@ function billController(billView, billModel, domTarget){
       const personJSON = this.model.readPerson(personId);
       //update model, assuming type unchanged
       this.model.updatePerson(personId, personJSON.type, e.target.value);
-      this.model.people.forEach(e=>console.log(e));
+      // this.model.people.forEach(e=>console.log(e));
+
+      //update shares
+      this.updateShares();
     });
 
 
@@ -392,9 +413,12 @@ function billController(billView, billModel, domTarget){
       this.model.addPerson();
       const newId = this.model.people[ newBill.countPeople()-1 ].id; 
       this.createPerson(newId);
+      this.updateShares();
     });
     this.target.appendChild(btn);
 
+    //update shares
+    this.updateShares();
   }
 
 };

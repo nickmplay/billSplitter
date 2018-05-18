@@ -1,5 +1,4 @@
 split-amount_input dependency
-add share view
-add controller shareUpdate
+check tests
 controller tests
 styling

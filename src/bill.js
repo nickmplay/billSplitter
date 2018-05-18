@@ -63,14 +63,14 @@ function Bill (amount, service = true) {
 
   //split the bill
   this.split = function(){
-    let total = this.amount;
+    let total = this.amount + 0;
     const n = this.countPeople();
     const count = {split:0, more:0, less:0, fixed:0};
     let shares = [];
 
     //trivial case: only one person
     if (n === 1){
-      shares.push({id: this.people[0].id, type: "split", share: amount});
+      shares.push({id: this.people[0].id, type: "split", share: total});
       return shares;
     }
 
@@ -95,7 +95,7 @@ function Bill (amount, service = true) {
     //case: all share
     if( count.split === n){
       for(let i = 0; i < n; i++){
-        shares.push({id: this.people[i].id, type: "split", share: this.r2dp(amount / n) });
+        shares.push({id: this.people[i].id, type: "split", share: this.r2dp(total / n) });
       };
       return shares;
     }
@@ -110,8 +110,8 @@ function Bill (amount, service = true) {
         sumAdj += this.people[i].amount;
       }
     }
-    amount += sumAdj;
-    let average = this.r2dp( amount / (n - count.fixed) );
+    total += sumAdj;
+    let average = this.r2dp( total / (n - count.fixed) );
 
     //populate results array
     for(let i = 0; i < n; i++){

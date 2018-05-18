@@ -36,10 +36,19 @@ exports[`test add person button 1`] = `
 </button>
 `;
 
+exports[`test default input amount box 1`] = `
+<input
+  placeholder="Enter amount"
+  type="number"
+  value="0"
+/>
+`;
+
 exports[`test input amount box 1`] = `
 <input
   placeholder="Enter amount"
   type="number"
+  value="100"
 />
 `;
 
@@ -78,6 +87,11 @@ exports[`test person DOM does not update 1`] = `
       fixed
     </option>
   </select>
+  <span
+    p-id="1462361249717"
+  >
+    Share: -
+  </span>
   <button>
     X
   </button>
@@ -119,6 +133,11 @@ exports[`test person DOM does not update 2`] = `
       fixed
     </option>
   </select>
+  <span
+    p-id="1462361249717"
+  >
+    Share: -
+  </span>
   <button>
     X
   </button>
@@ -160,6 +179,11 @@ exports[`test person DOM update 1`] = `
       fixed
     </option>
   </select>
+  <span
+    p-id="1462361249717"
+  >
+    Share: -
+  </span>
   <button>
     X
   </button>
@@ -201,6 +225,11 @@ exports[`test person DOM update 2`] = `
       fixed
     </option>
   </select>
+  <span
+    p-id="1462361249717"
+  >
+    Share: -
+  </span>
   <button>
     X
   </button>
@@ -242,6 +271,11 @@ exports[`test person template injection 1`] = `
       fixed
     </option>
   </select>
+  <span
+    p-id="1462361249717"
+  >
+    Share: -
+  </span>
   <button>
     X
   </button>

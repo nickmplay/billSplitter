@@ -5,6 +5,7 @@ exports[`instantiate a controller class 1`] = `
   <input
     placeholder="Enter amount"
     type="number"
+    value="100"
   />
   <ol>
     <li
@@ -41,6 +42,11 @@ exports[`instantiate a controller class 1`] = `
           fixed
         </option>
       </select>
+      <span
+        p-id="1462361249717"
+      >
+        Share: 50
+      </span>
       <button>
         X
       </button>
@@ -79,6 +85,11 @@ exports[`instantiate a controller class 1`] = `
           fixed
         </option>
       </select>
+      <span
+        p-id="1462361249718"
+      >
+        Share: 50
+      </span>
       <button>
         X
       </button>

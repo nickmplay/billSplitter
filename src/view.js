@@ -26,7 +26,8 @@ function ViewBill() {
       const sel = data.type === e ? "selected" : "";
       return `<option value='${e}' ${sel}>${e}</option>`;
     }).join('');
-    personTemplate += "</select><button>X</button>";
+    personTemplate += `</select><span p-id=${data.id}>Share: -</span>`;
+    personTemplate += "<button>X</button>";
 
     //create element and inject data
     const pDiv = document.createElement("li");
@@ -52,16 +53,21 @@ function ViewBill() {
     }
   }
 
+  this.updateShare = function(app, id, shareAmount){
+    app.querySelector(`span[p-id='${id}']`).innerHTML = `Share: ${shareAmount}`;
+  }
+
   this.addPersonButton = function(){
     const addPersonBtn = document.createElement("button");
     addPersonBtn.innerHTML = "Add Person";
     return addPersonBtn;
   }
 
-  this.createAmountInput = function(){
+  this.createAmountInput = function(startAmount = 0){
     const amountInput = document.createElement("input");
     amountInput.setAttribute("type", "number");
     amountInput.setAttribute("placeholder", "Enter amount");
+    amountInput.setAttribute("value", startAmount);
     return amountInput;
   }
   

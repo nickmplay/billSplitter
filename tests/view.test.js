@@ -62,5 +62,10 @@ test('test add person button', () => {
 //test add amount input 
 test('test input amount box', () => {
   const newVB = new ViewBill();
+  expect( newVB.createAmountInput(100) ).toMatchSnapshot();
+}); 
+
+test('test default input amount box', () => {
+  const newVB = new ViewBill();
   expect( newVB.createAmountInput() ).toMatchSnapshot();
 }); 
