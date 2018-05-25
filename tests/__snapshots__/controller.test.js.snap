@@ -3,6 +3,7 @@
 exports[`instantiate a controller class 1`] = `
 <div>
   <input
+    class="input-total"
     placeholder="Enter amount"
     type="number"
     value="100"
@@ -95,7 +96,9 @@ exports[`instantiate a controller class 1`] = `
       </button>
     </li>
   </ol>
-  <button>
+  <button
+    class="addPersonBtn"
+  >
     Add Person
   </button>
 </div>

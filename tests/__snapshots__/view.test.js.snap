@@ -31,13 +31,16 @@ exports[`test a ViewBill DOM return 1`] = `
 `;
 
 exports[`test add person button 1`] = `
-<button>
+<button
+  class="addPersonBtn"
+>
   Add Person
 </button>
 `;
 
 exports[`test default input amount box 1`] = `
 <input
+  class="input-total"
   placeholder="Enter amount"
   type="number"
   value="0"
@@ -46,6 +49,7 @@ exports[`test default input amount box 1`] = `
 
 exports[`test input amount box 1`] = `
 <input
+  class="input-total"
   placeholder="Enter amount"
   type="number"
   value="100"

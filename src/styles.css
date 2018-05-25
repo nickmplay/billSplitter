@@ -1,0 +1,59 @@
+h1 {
+  color:blue;
+  text-align: center;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+#app li {
+  border: 0;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  padding: 5px;
+}
+
+#app li:nth-child(even) {
+  background: lightgrey;
+}
+
+#app li:nth-child(odd) {
+  background: grey;
+}
+
+#app li input {
+  width: 40px;
+}
+
+#app li button {
+  background: red;
+  border: 0;
+  color: white;
+}
+
+#app span {
+  background: lightgreen;
+  padding: 3px 5px;
+  font-weight: bold;
+  width: 90px;
+}
+
+.input-total {
+  margin: auto;
+  width: 60px;
+  text-align: center;
+}
+
+.addPersonBtn {
+  border: 0;
+  background: blue;
+  color: white;
+  margin: 0 auto;
+  padding: 3px 5px;
+  width: 120px;
+}

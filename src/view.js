@@ -59,6 +59,7 @@ function ViewBill() {
 
   this.addPersonButton = function(){
     const addPersonBtn = document.createElement("button");
+    addPersonBtn.setAttribute("class","addPersonBtn");
     addPersonBtn.innerHTML = "Add Person";
     return addPersonBtn;
   }
@@ -66,6 +67,7 @@ function ViewBill() {
   this.createAmountInput = function(startAmount = 0){
     const amountInput = document.createElement("input");
     amountInput.setAttribute("type", "number");
+    amountInput.setAttribute("class", "input-total");
     amountInput.setAttribute("placeholder", "Enter amount");
     amountInput.setAttribute("value", startAmount);
     return amountInput;
