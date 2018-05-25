@@ -51,6 +51,15 @@ function billController(billView, billModel, domTarget){
       this.model.updatePerson(personId, e.target.children[chosenIndex].value, personJSON.amount);
       // this.model.people.forEach(e=>console.log(e));
       
+      //disable input if split option selected
+      if(e.target.children[chosenIndex].value == "split"){
+        e.target.parentElement.querySelector("input").value = 0;
+        e.target.parentElement.querySelector("input").disabled = true;
+      } else {
+        e.target.parentElement.querySelector("input").disabled = false;
+      }
+      
+
       //update shares
       this.updateShares();
     });
@@ -66,9 +75,6 @@ function billController(billView, billModel, domTarget){
       //update shares
       this.updateShares();
     });
-
-
-
 
     //append to ol DOM
     this.olPeople.appendChild(pNew);

@@ -34,6 +34,7 @@ function ViewBill() {
     pDiv.setAttribute("p-id", data.id);
     let pInner = personTemplate.replace("{{amount}}", data.amount);
     pDiv.innerHTML = pInner;
+    pDiv.querySelector("input").disabled = (data.type == "split");
     return pDiv;
   }
 

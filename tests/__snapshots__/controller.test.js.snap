@@ -16,6 +16,7 @@ exports[`instantiate a controller class 1`] = `
       <input
         <=""
         class="p-amount"
+        disabled=""
         input=""
         placeholder="0"
         type="number"
@@ -59,6 +60,7 @@ exports[`instantiate a controller class 1`] = `
       <input
         <=""
         class="p-amount"
+        disabled=""
         input=""
         placeholder="0"
         type="number"

@@ -1,4 +1,2 @@
-split-amount_input dependency
-check tests
 controller tests
 styling
