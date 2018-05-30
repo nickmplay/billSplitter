@@ -1,5 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`edit a person 1`] = `
+<div>
+  <input
+    class="input-total"
+    placeholder="Enter amount"
+    type="number"
+    value="100"
+  />
+  <ol>
+    <li
+      p-id="1462361249717"
+    >
+      To pay 
+      <input
+        <=""
+        class="p-amount"
+        input=""
+        placeholder="0"
+        type="number"
+        value="10"
+      />
+      <select>
+        <option
+          value="split"
+        >
+          split
+        </option>
+        <option
+          selected="true"
+          value="more"
+        >
+          more
+        </option>
+        <option
+          value="less"
+        >
+          less
+        </option>
+        <option
+          value="fixed"
+        >
+          fixed
+        </option>
+      </select>
+      <span
+        p-id="1462361249717"
+      >
+        Share: 55
+      </span>
+      <button>
+        X
+      </button>
+    </li>
+    <li
+      p-id="1462361249718"
+    >
+      To pay 
+      <input
+        <=""
+        class="p-amount"
+        disabled=""
+        input=""
+        placeholder="0"
+        type="number"
+      />
+      <select>
+        <option
+          selected=""
+          value="split"
+        >
+          split
+        </option>
+        <option
+          value="more"
+        >
+          more
+        </option>
+        <option
+          value="less"
+        >
+          less
+        </option>
+        <option
+          value="fixed"
+        >
+          fixed
+        </option>
+      </select>
+      <span
+        p-id="1462361249718"
+      >
+        Share: 45
+      </span>
+      <button>
+        X
+      </button>
+    </li>
+  </ol>
+  <button
+    class="addPersonBtn"
+  >
+    Add Person
+  </button>
+</div>
+`;
+
 exports[`instantiate a controller class 1`] = `
 <div>
   <input

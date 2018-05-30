@@ -55,3 +55,27 @@ test('remove a person', ()=>{
   expect( dom.querySelectorAll("li").length ).toBe(1);
   expect( dom.querySelectorAll("span")[0].innerHTML ).toBe('Share: 100'); 
 });
+
+test('edit a person', ()=>{
+  expect( testCon.model.countPeople() ).toBe(startingNumber);
+  
+  //mock UI
+  dom.querySelector("li").querySelectorAll("option")[0].removeAttribute("selected");
+  dom.querySelector("li").querySelectorAll("option")[1].setAttribute("selected", true);
+  dom.querySelector("li").querySelector("input").disabled = false;
+  dom.querySelector("li").querySelector("input").setAttribute("value", 10);
+  
+  //fire event listeners
+  const event = document.createEvent('Event');
+  event.initEvent('change', true, true);  
+  dom.querySelector("li").querySelector("input").dispatchEvent(event);
+  dom.querySelector("li").querySelector("select").dispatchEvent(event);
+  
+  //test dom
+  expect(dom).toMatchSnapshot();
+  const shares = [];
+  for(let i=0; i<2; i++){
+    shares.push( dom.querySelectorAll("span")[i].innerHTML );
+  }
+  expect( shares.join("") ).toBe('Share: 55Share: 45'); 
+});
