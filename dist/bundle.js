@@ -420,7 +420,7 @@ function billController(billView, billModel, domTarget){
     const btn = this.view.addPersonButton();
     btn.addEventListener("click", e => {
       this.model.addPerson();
-      const newId = this.model.people[ newBill.countPeople()-1 ].id; 
+      const newId = this.model.people[ this.model.countPeople()-1 ].id; 
       this.createPerson(newId);
       this.updateShares();
     });

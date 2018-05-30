@@ -17,3 +17,17 @@ test('instantiate a controller class', () => {
   expect(dom).toMatchSnapshot();
 });
 
+test('add a person', ()=>{
+  dom.querySelectorAll("button")[2].click();
+  expect( testCon.model.countPeople() ).toBe(3);
+  expect( dom.querySelectorAll("li").length ).toBe(3);
+  const shares = [];
+  for(let i=0; i<3; i++){
+    shares.push( dom.querySelectorAll("span")[i].innerHTML );
+  }
+  expect( shares.join("") ).toBe('Share: 33.33Share: 33.33Share: 33.33'); 
+});
+
+test('remove a person', ()=>{
+  console.log( testCon.model.countPeople() );
+});
