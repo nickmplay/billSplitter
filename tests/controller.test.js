@@ -84,13 +84,13 @@ test('edit a person', ()=>{
 test('test all options', ()=>{
   expect( testCon.model.countPeople() ).toBe(startingNumber);
   dom.querySelector("button.addPersonBtn").click();
-  dom.querySelector("button.addPersonBtn").click();
+  // dom.querySelector("button.addPersonBtn").click();
   //wait required otherwise view doesnt complete render
-  wait(7000);
-  expect( testCon.model.countPeople() ).toBe(4);
-  expect( dom.querySelectorAll("li").length ).toBe(4);
-  // expect( shareString(dom) ).toBe('Share: 33.33Share: 33.33Share: 33.33');
-  expect( shareString(dom) ).toBe('Share: 25Share: 25Share: 25Share: 25');
+  // wait(7000);
+  expect( testCon.model.countPeople() ).toBe(3);
+  expect( dom.querySelectorAll("li").length ).toBe(3);
+  expect( shareString(dom) ).toBe('Share: 33.33Share: 33.33Share: 33.33');
+  // expect( shareString(dom) ).toBe('Share: 25Share: 25Share: 25Share: 25');
 
   //mock UI person 1 - more
   dom.querySelectorAll("li")[0].querySelectorAll("option")[0].removeAttribute("selected");
@@ -119,6 +119,6 @@ test('test all options', ()=>{
   dom.querySelectorAll("li")[2].querySelector("input").dispatchEvent(changeEvent);
   dom.querySelectorAll("li")[2].querySelector("select").dispatchEvent(changeEvent);
 
-  // expect( shareString(dom) ).toBe('Share: 55Share: 35Share: 10'); 
-  expect( shareString(dom) ).toBe('Share: 40Share: 20Share: 10Share: 30'); 
+  expect( shareString(dom) ).toBe('Share: 55Share: 35Share: 10'); 
+  // expect( shareString(dom) ).toBe('Share: 40Share: 20Share: 10Share: 30'); 
 });

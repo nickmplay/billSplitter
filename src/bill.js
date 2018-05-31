@@ -120,13 +120,13 @@ function Bill (amount, service = true) {
           shares.push({id: this.people[i].id, type: "split", share: average }); 
           break;
         case "more":
-          shares.push({id: this.people[i].id, type: "more", share: average + this.people[i].amount });
+          shares.push({id: this.people[i].id, type: "more", share: this.r2dp(average + this.people[i].amount) });
           break;
         case "less":
-          shares.push({id: this.people[i].id, type: "less", share: average - this.people[i].amount });
+          shares.push({id: this.people[i].id, type: "less", share: this.r2dp(average - this.people[i].amount) });
           break;
         case "fixed":
-          shares.push({id: this.people[i].id, type: "fixed", share: this.people[i].amount });
+          shares.push({id: this.people[i].id, type: "fixed", share: this.r2dp(this.people[i].amount) });
           break;
       }
     };
