@@ -6,7 +6,7 @@ const { billController } = require('../src/controller');
 let newView, newModel, fakeId, dom, testCon, changeEvent;
 const startingNumber = 2;
 
-const shareString = (appDom)=>{
+const shareString = (appDom) => {
   const shares = [];
   const numLis = appDom.querySelectorAll("li").length;
   for(let i=0; i<numLis; i++){
@@ -14,6 +14,15 @@ const shareString = (appDom)=>{
   }
   return shares.join("");
 };
+
+//delay required to allow simulated DOM manipulation to finish
+const wait = (ms) => {
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
+}
 
 beforeEach(()=>{
   newView = new ViewBill();
@@ -70,4 +79,46 @@ test('edit a person', ()=>{
   //test dom
   expect(dom).toMatchSnapshot();
   expect( shareString(dom) ).toBe('Share: 55Share: 45'); 
+});
+
+test('test all options', ()=>{
+  expect( testCon.model.countPeople() ).toBe(startingNumber);
+  dom.querySelector("button.addPersonBtn").click();
+  dom.querySelector("button.addPersonBtn").click();
+  //wait required otherwise view doesnt complete render
+  wait(7000);
+  expect( testCon.model.countPeople() ).toBe(4);
+  expect( dom.querySelectorAll("li").length ).toBe(4);
+  // expect( shareString(dom) ).toBe('Share: 33.33Share: 33.33Share: 33.33');
+  expect( shareString(dom) ).toBe('Share: 25Share: 25Share: 25Share: 25');
+
+  //mock UI person 1 - more
+  dom.querySelectorAll("li")[0].querySelectorAll("option")[0].removeAttribute("selected");
+  dom.querySelectorAll("li")[0].querySelectorAll("option")[1].setAttribute("selected", true);
+  dom.querySelectorAll("li")[0].querySelector("input").disabled = false;
+  dom.querySelectorAll("li")[0].querySelector("input").setAttribute("value", 10);
+
+  dom.querySelectorAll("li")[0].querySelector("input").dispatchEvent(changeEvent);
+  dom.querySelectorAll("li")[0].querySelector("select").dispatchEvent(changeEvent);
+
+  //mock UI person 2 - less
+  dom.querySelectorAll("li")[1].querySelectorAll("option")[0].removeAttribute("selected");
+  dom.querySelectorAll("li")[1].querySelectorAll("option")[2].setAttribute("selected", true);
+  dom.querySelectorAll("li")[1].querySelector("input").disabled = false;
+  dom.querySelectorAll("li")[1].querySelector("input").setAttribute("value", 10);
+
+  dom.querySelectorAll("li")[1].querySelector("input").dispatchEvent(changeEvent);
+  dom.querySelectorAll("li")[1].querySelector("select").dispatchEvent(changeEvent);
+  
+  //mock UI person 3 - fixed
+  dom.querySelectorAll("li")[2].querySelectorAll("option")[0].removeAttribute("selected");
+  dom.querySelectorAll("li")[2].querySelectorAll("option")[3].setAttribute("selected", true);
+  dom.querySelectorAll("li")[2].querySelector("input").disabled = false;
+  dom.querySelectorAll("li")[2].querySelector("input").setAttribute("value", 10);
+
+  dom.querySelectorAll("li")[2].querySelector("input").dispatchEvent(changeEvent);
+  dom.querySelectorAll("li")[2].querySelector("select").dispatchEvent(changeEvent);
+
+  // expect( shareString(dom) ).toBe('Share: 55Share: 35Share: 10'); 
+  expect( shareString(dom) ).toBe('Share: 40Share: 20Share: 10Share: 30'); 
 });
