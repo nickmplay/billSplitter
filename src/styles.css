@@ -1,13 +1,46 @@
+* {
+  background: #FBFBEF;
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+}
+
 h1 {
-  color:blue;
+  background: #1F301D;
+  color:white;
+  margin-bottom: 5px;
   text-align: center;
+  padding-top: 4px;
+  padding-bottom: 6px;
 }
 
 #app {
+  color: white;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 600px;
+  vertical-align: middle;
+}
+
+#app .totalBill {
+  background: #FE9A2E;
+  text-align: center;
+}
+
+#app .totalBill label {
+  background: #FE9A2E;
+  margin-right: 5px;
+}
+
+#app .input-total {
+  margin: 5px auto;
+  padding: 2px 0;
+  width: 60px;
+  text-align: center;
+}
+
+#app ol {
+  padding: 0;
 }
 
 #app li {
@@ -19,41 +52,42 @@ h1 {
 }
 
 #app li:nth-child(even) {
-  background: lightgrey;
+  background: #1F301D;
 }
 
 #app li:nth-child(odd) {
-  background: grey;
+  background: #6F8350;
 }
 
 #app li input {
   width: 40px;
 }
 
+#app li input:disabled {
+  background: #808080;
+  color: #808080;
+}
+
 #app li button {
   background: red;
   border: 0;
   color: white;
+  font-size: 60%;
 }
 
 #app span {
-  background: lightgreen;
-  padding: 3px 5px;
+  background: #FE9A2E;
   font-weight: bold;
-  width: 90px;
-}
-
-.input-total {
-  margin: auto;
-  width: 60px;
-  text-align: center;
-}
-
-.addPersonBtn {
-  border: 0;
-  background: blue;
-  color: white;
-  margin: 0 auto;
   padding: 3px 5px;
-  width: 120px;
+  width: 100px;
+}
+
+#app .addPersonBtn {
+  border: 0;
+  background: #88315E;
+  color: white;
+  font-size: 1.2em;
+  margin: 5px auto;
+  padding: 5px 10px;
+  width: 140px;
 }

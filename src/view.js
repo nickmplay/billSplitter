@@ -66,12 +66,20 @@ function ViewBill() {
   }
 
   this.createAmountInput = function(startAmount = 0){
+    const amountDiv = document.createElement("div");
+    amountDiv.setAttribute("class", "totalBill");
+    const amountLabel = document.createElement("label");
+    amountLabel.setAttribute("for", "amountInp");
+    amountLabel.innerHTML = "Enter total bill to split:";
     const amountInput = document.createElement("input");
+    amountInput.setAttribute("name", "amountInp");
     amountInput.setAttribute("type", "number");
     amountInput.setAttribute("class", "input-total");
     amountInput.setAttribute("placeholder", "Enter amount");
     amountInput.setAttribute("value", startAmount);
-    return amountInput;
+    amountDiv.appendChild(amountLabel);
+    amountDiv.appendChild(amountInput);
+    return amountDiv;
   }
   
 

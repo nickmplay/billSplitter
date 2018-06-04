@@ -39,21 +39,41 @@ exports[`test add person button 1`] = `
 `;
 
 exports[`test default input amount box 1`] = `
-<input
-  class="input-total"
-  placeholder="Enter amount"
-  type="number"
-  value="0"
-/>
+<div
+  class="totalBill"
+>
+  <label
+    for="amountInp"
+  >
+    Enter total bill to split:
+  </label>
+  <input
+    class="input-total"
+    name="amountInp"
+    placeholder="Enter amount"
+    type="number"
+    value="0"
+  />
+</div>
 `;
 
 exports[`test input amount box 1`] = `
-<input
-  class="input-total"
-  placeholder="Enter amount"
-  type="number"
-  value="100"
-/>
+<div
+  class="totalBill"
+>
+  <label
+    for="amountInp"
+  >
+    Enter total bill to split:
+  </label>
+  <input
+    class="input-total"
+    name="amountInp"
+    placeholder="Enter amount"
+    type="number"
+    value="100"
+  />
+</div>
 `;
 
 exports[`test person DOM does not update 1`] = `

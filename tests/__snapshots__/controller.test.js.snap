@@ -2,12 +2,22 @@
 
 exports[`edit a person 1`] = `
 <div>
-  <input
-    class="input-total"
-    placeholder="Enter amount"
-    type="number"
-    value="100"
-  />
+  <div
+    class="totalBill"
+  >
+    <label
+      for="amountInp"
+    >
+      Enter total bill to split:
+    </label>
+    <input
+      class="input-total"
+      name="amountInp"
+      placeholder="Enter amount"
+      type="number"
+      value="100"
+    />
+  </div>
   <ol>
     <li
       p-id="1462361249717"
@@ -108,12 +118,22 @@ exports[`edit a person 1`] = `
 
 exports[`instantiate a controller class 1`] = `
 <div>
-  <input
-    class="input-total"
-    placeholder="Enter amount"
-    type="number"
-    value="100"
-  />
+  <div
+    class="totalBill"
+  >
+    <label
+      for="amountInp"
+    >
+      Enter total bill to split:
+    </label>
+    <input
+      class="input-total"
+      name="amountInp"
+      placeholder="Enter amount"
+      type="number"
+      value="100"
+    />
+  </div>
   <ol>
     <li
       p-id="1462361249717"
