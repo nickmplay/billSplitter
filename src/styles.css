@@ -1,5 +1,5 @@
 * {
-  background: #FBFBEF;
+  background: #C3C3C3;
   font-family: Arial, Helvetica, sans-serif;
   margin:0;
 }
@@ -11,6 +11,43 @@ h1 {
   text-align: center;
   padding-top: 4px;
   padding-bottom: 6px;
+}
+
+.guide {
+  border: 1px solid black;
+  margin: 0 auto;
+  margin-bottom: 6px;
+  max-width: 600px;
+  vertical-align: middle;
+}
+
+.glyphicon-plus:before {
+  content: "\002b";
+}
+
+.glyphicon-minus:before {
+  content: "\2212"
+}
+
+.guide h2, span {
+  background: #88315E;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 100;
+  padding:2px 5px;
+}
+
+.guide span {
+  float: right;
+  font-size: 1em;
+  padding: 0;
+}
+
+.guideText * {
+  border-top: 1px solid black;
+  padding:4px 5px;
+  background: #c2568e;
+  color: white;
 }
 
 #app {
@@ -33,6 +70,7 @@ h1 {
 }
 
 #app .input-total {
+  background: white;
   margin: 5px auto;
   padding: 2px 0;
   width: 60px;
@@ -60,7 +98,12 @@ h1 {
 }
 
 #app li input {
+  background: white;
   width: 40px;
+}
+
+#app li select, option {
+  background: white;
 }
 
 #app li input:disabled {
@@ -79,7 +122,7 @@ h1 {
   background: #FE9A2E;
   font-weight: bold;
   padding: 3px 5px;
-  width: 100px;
+  width: 130px;
 }
 
 #app .addPersonBtn {

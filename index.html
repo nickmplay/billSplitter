@@ -10,13 +10,44 @@
 </head>
 <body>
   <h1 id="header">Bill Splitter App</h1>
+  
+  <div class="guide">
+    <h2>Instructions <span class="glyphicon-minus"></span><span class="glyphicon-plus"></span></h2>
+    <div class="guideText">
+      <p>Enter the total bill amount, and the app works out how much each person should pay.<br />The amount is spread evenly if all people are set to 'split' in the drop down.<br />If someone wants to pay more or less than the even split, then set the drop down to either 'more' or 'less' and then specify the amount more or less that person wants to pay.<br />If someone wants to pay a fixed amount, set them to 'fixed' and set how much they are going to pay. The remainder is then split amongst the other people.<br />You can add more people by clicking the Add Person button, and remove people by pushing the relevant X</p>
+    </div>
+  </div>
+
   <div id="app"></div>
+
   <script>
+    //hide guide by default
+    document.querySelector(".glyphicon-minus").style.display = 'none';
+    document.querySelector(".guideText").style.display = 'none';
+    
+    //load app
     const newVB = new ViewBill();
     const newBill = new Bill(100);
     const newCon = new billController(newVB, newBill, document.getElementById("app"));
     newCon.createApp();
     
+    //add guide event listener
+    document.querySelector(".guide").addEventListener("click", e => {
+      const textDiv = document.querySelector(".guideText");
+      const glyphPlus = document.querySelector(".glyphicon-minus");
+      const glyphMinus = document.querySelector(".glyphicon-plus");
+
+      if (textDiv.style.display == 'none') {
+        textDiv.style.display = ''; 
+        glyphMinus.style.display = 'none';
+        glyphPlus.style.display = '';
+      } else {
+        textDiv.style.display = 'none'; 
+        glyphMinus.style.display = '';
+        glyphPlus.style.display = 'none';
+      };
+    });
+
   </script>
 </body>
 </html>
