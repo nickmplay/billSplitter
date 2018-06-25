@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`promise should not update 1`] = `
+<div>
+  Say something
+</div>
+`;
+
+exports[`promise should update 1`] = `
+<div>
+  something else
+</div>
+`;
+
+exports[`see div snapshot 1`] = `
+<div>
+  Say something
+</div>
+`;
